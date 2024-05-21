@@ -1,8 +1,16 @@
 package ru.jack;
 
+import org.springframework.stereotype.*;
+
 import java.util.*;
 
 // Грубо - класс-база данных пользователей
+@Component  // класс UserRepository объявляется как компонент (Bean)
+// @Service - так помечаются бины, где есть бизнес-логика, по функционалу не отличается от @Component
+// @Repository - тот же @Component (но есть расширенный функционал), так помечают бины, отвечающие за связь с данными
+
+//== @Component - связка @Component и @Lazy заставит Spring создать экземпляры бинов не при запуске приложения,
+//== @Lazy   // а в момент первого обращения к контексту
 public class UserRepository {
 
     private final List<User> users;
