@@ -1,5 +1,8 @@
 package ru.jack;
 
+import org.springframework.beans.factory.config.*;
+import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.*;
 
 import java.util.*;
@@ -10,7 +13,16 @@ import java.util.*;
 // @Repository - тот же @Component (но есть расширенный функционал), так помечают бины, отвечающие за связь с данными
 
 //== @Component - связка @Component и @Lazy заставит Spring создать экземпляры бинов не при запуске приложения,
-//== @Lazy   // а в момент первого обращения к контексту
+//== @Lazy   // а в момент первого обращения к контексту. Такая связка не рекомендуется.
+
+//@Component
+//@Scope("singleton") - по умолчанию, создается только один экземпляр бина
+
+//@Component
+//@Scope("prototype") - допускается создание более одного экземпляра бина
+//@Scope(ConfigurableListableBeanFactory.SCOPE_PROTOTYPE) - то же самое, что и @Scope("prototype")
+
+
 public class UserRepository {
 
     private final List<User> users;
