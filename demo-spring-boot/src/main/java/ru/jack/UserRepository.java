@@ -8,7 +8,12 @@ import org.springframework.stereotype.*;
 import java.util.*;
 
 // Грубо - класс-база данных пользователей
-@Component  // класс UserRepository объявляется как компонент (Bean)
+@Component
+@Primary // эта аннотация указывает, что при вызове бина только по типу (context.getBean(UserRepository.class)
+// и наличии нескольких экземпляров бинов - вернется только тот, который с аннотацией @Primary
+// при вызове по типу и имени (context.getBean("myUserRepository", UserRepository.class) ошибки не будет
+//@Component("myUserRepository")  // класс UserRepository объявляется как компонент (Bean)
+// идентификатор по умолчанию - имя класса с маленькой буквы("userRepository")
 // @Service - так помечаются бины, где есть бизнес-логика, по функционалу не отличается от @Component
 // @Repository - тот же @Component (но есть расширенный функционал), так помечают бины, отвечающие за связь с данными
 
