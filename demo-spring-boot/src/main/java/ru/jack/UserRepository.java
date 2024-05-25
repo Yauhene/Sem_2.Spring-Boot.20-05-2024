@@ -53,4 +53,11 @@ public class UserRepository {
                 .findFirst() // выбирает первый объект из отфильтрованных
                 .orElse(null); // возвращает null при неудачном поиске
     }
+
+    public User getByName(String name) {
+        return users.stream()
+                .filter(it -> Objects.equals(it.getName(), name)) // фильтрует пользователей по значению id
+                .findFirst() // выбирает первый объект из отфильтрованных
+                .orElse(null); // возвращает null при неудачном поиске
+    }
 }
