@@ -160,3 +160,33 @@ public class UserController {
     }
 }
 =========================================================================================
+------------------------------------------------------------------------------------------------------------
+5. Инъекции через ApplicationConfiguration
+    Прежний листинг ===================================================================
+   public class ApplicationConfiguration {
+
+   @Bean
+   UserRepository myUserRepository() {
+
+        return new UserRepository();
+   }
+
+}
+        ===================================================================
+    Возможен такой вариант: ===============================================
+public class ApplicationConfiguration {
+
+    @Bean
+    UserRepository myUserRepository() {
+        return new UserRepository();
+    }
+
+    @Bean
+    UserController userController(UserRepository repository) {
+        return new UserController(repository);
+    }
+
+}
+=============================================================================
+
+    
