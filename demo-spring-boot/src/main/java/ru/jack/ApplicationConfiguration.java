@@ -10,7 +10,6 @@ public class ApplicationConfiguration {
 
     @Bean
     UserRepository myUserRepository() {
-
         return new UserRepository();
     }
 
