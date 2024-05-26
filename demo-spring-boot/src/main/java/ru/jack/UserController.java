@@ -3,6 +3,7 @@ package ru.jack;
 
 import lombok.*;
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.http.*;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,6 +37,7 @@ public class UserController {
     private final UserRepository repository;
 
     public UserController(UserRepository repository) {
+
         this.repository = repository; // внедрение бина
     }
 
@@ -47,6 +49,21 @@ public class UserController {
     public List<User> getUsers() {
         return repository.getAll();
     }
+
+    @GetMapping(value = "/test", produces = MediaType.TEXT_PLAIN_VALUE) // текст будет воспринят как текст
+                            // (выведет буквально "<h1>Title, dumn it!</h1>"
+    public String test() {
+        return """
+                <h1>Title, dumn it!</h1>
+                """;
+    }
+
+//    @GetMapping(value = "/test", produces = MediaType.TEXT_HTML_VALUE) // текст будет воспринят как HTML
+//    public String test() {
+//        return """
+//                <h1>Title, dumn it!</h1>
+//                """;
+//    }
 
     @GetMapping("/{id}")
     public User getUser(@PathVariable long id) {
@@ -63,7 +80,7 @@ public class UserController {
         return repository.getByName(name);
     }
 
-    @PutMapping("/id}")
+    @PutMapping("/{id}")
     public User updateUser(@PathVariable long id, @RequestBody User user) {
         User existUser = repository.getById(id);
         if (existUser == null) { // 404 если юзер не найден
